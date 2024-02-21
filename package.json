@@ -30,6 +30,6 @@
     "homepage": "https://github.com/marchuanv/component.namespace#readme",
     "dependencies": {
         "component.uuid": "marchuanv/component.uuid",
-        "utils": "marchuanv/utils"
+        "component.specs": "marchuanv/component.specs"
     }
 }
