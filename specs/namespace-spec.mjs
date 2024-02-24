@@ -16,28 +16,20 @@ class InvalidNamespace extends NamespaceB {
         return super(['$##@.%#$%']);
     }
 }
-describe('when creating a valid namespace', () => {
-    it('should have equality between two of the same namespaces', () => {
-        const id = new NamespaceA();
-        const id2 = new NamespaceA();
-        expect(id).toBeDefined();
-        expect(id).not.toBeNull();
-        expect(id2).toBeDefined();
-        expect(id2).not.toBeNull();
-        expect(id).toBe(id2);
-        expect(id).toEqual(id2);
-        expect(id.value).toBe(id2.value);
+describe('when creating two valid namespaces', () => {
+    it('should have equality between the same namespaces', () => {
+        const nsA = new NamespaceA();
+        const nsB = new NamespaceA();
+        expect(nsA).toBe(nsB);
+        expect(nsA).toEqual(nsB);
+        expect(nsA.toString()).toBe(nsB.toString());
     });
-    it('should not have equality between two different namespaces', () => {
-        const id = new NamespaceB();
-        const id2 = new NamespaceA();
-        expect(id).toBeDefined();
-        expect(id).not.toBeNull();
-        expect(id2).toBeDefined();
-        expect(id2).not.toBeNull();
-        expect(id).not.toBe(id2);
-        expect(id).not.toEqual(id2);
-        expect(id.value).not.toBe(id2.value);
+    it('should not have equality between different namespaces', () => {
+        const nsA = new NamespaceA();
+        const nsB = new NamespaceB();
+        expect(nsA).not.toBe(nsB);
+        expect(nsA).not.toEqual(nsB);
+        expect(nsA.toString()).not.toBe(nsB.toString());
     });
 });
 describe('when creating an invalid namespace given a namespace of "part.$##@.%#$%"', () => {
