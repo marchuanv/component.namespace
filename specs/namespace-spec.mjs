@@ -22,14 +22,14 @@ describe('when creating two valid namespaces', () => {
         const nsB = new NamespaceA();
         expect(nsA).toBe(nsB);
         expect(nsA).toEqual(nsB);
-        expect(nsA.toString()).toBe(nsB.toString());
+        expect(`${nsA}`).toBe(`${nsB}`);
     });
     it('should not have equality between different namespaces', () => {
         const nsA = new NamespaceA();
         const nsB = new NamespaceB();
         expect(nsA).not.toBe(nsB);
         expect(nsA).not.toEqual(nsB);
-        expect(nsA.toString()).not.toBe(nsB.toString());
+        expect(`${nsA}`).not.toBe(`${nsB}`);
     });
 });
 describe('when creating an invalid namespace given a namespace of "part.$##@.%#$%"', () => {
