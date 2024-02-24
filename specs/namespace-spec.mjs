@@ -16,6 +16,11 @@ class InvalidNamespace extends NamespaceB {
         return super(['$##@.%#$%']);
     }
 }
+class GetNamespace extends Namespace {
+    constructor() {
+        return super(['SegmentC', 'SegmentB','SegmentA']);
+    }
+}
 describe('when creating two valid namespaces', () => {
     it('should have equality between the same namespaces', () => {
         const nsA = new NamespaceA();
@@ -30,6 +35,19 @@ describe('when creating two valid namespaces', () => {
         expect(nsA).not.toBe(nsB);
         expect(nsA).not.toEqual(nsB);
         expect(`${nsA}`).not.toBe(`${nsB}`);
+    });
+});
+describe('when getting a namespace given NamespaceB created and "segmentb.segmenta" as criteria to namespace.get', () => {
+    let nsB = null;
+    let ns = null;
+    beforeAll(() => {
+        nsB = new NamespaceB();
+        ns = Namespace.get('segmentb.segmenta');
+    });
+    it('should return namespaceB', () => {
+        expect(ns).toBeInstanceOf(Namespace);
+        expect(nsB).toBeInstanceOf(Namespace);
+        expect(ns).toBe(nsB)
     });
 });
 describe('when creating an invalid namespace given a namespace of "part.$##@.%#$%"', () => {
