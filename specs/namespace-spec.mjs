@@ -16,11 +16,6 @@ class InvalidNamespace extends NamespaceB {
         return super(['$##@.%#$%']);
     }
 }
-class GetNamespace extends Namespace {
-    constructor() {
-        return super(['SegmentC', 'SegmentB','SegmentA']);
-    }
-}
 describe('when creating two valid namespaces', () => {
     it('should have equality between the same namespaces', () => {
         const nsA = new NamespaceA();
@@ -37,17 +32,20 @@ describe('when creating two valid namespaces', () => {
         expect(`${nsA}`).not.toBe(`${nsB}`);
     });
 });
-describe('when getting a namespace given NamespaceB created and "segmentb.segmenta" as criteria to namespace.get', () => {
-    let nsB = null;
-    let ns = null;
+describe('when creating a valid namespaces given accessing guid store outside of the security context', () => {
+    let error = null;
     beforeAll(() => {
-        nsB = new NamespaceB();
-        ns = Namespace.get('segmentb.segmenta');
+        try {
+            const ns = new NamespaceA();
+            ns.get({ type: Namespace });
+        } catch (err) {
+            error = err;
+        }
     });
-    it('should return namespaceB', () => {
-        expect(ns).toBeInstanceOf(Namespace);
-        expect(nsB).toBeInstanceOf(Namespace);
-        expect(ns).toBe(nsB)
+    it('should raise an error', () => {
+        expect(error).toBeDefined();
+        expect(error).not.toBeNull();
+        expect(error.message).toBe('Secure Context Error: failed to get value');
     });
 });
 describe('when creating an invalid namespace given a namespace of "part.$##@.%#$%"', () => {
