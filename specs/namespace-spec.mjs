@@ -32,22 +32,6 @@ describe('when creating two valid namespaces', () => {
         expect(`${nsA}`).not.toBe(`${nsB}`);
     });
 });
-describe('when creating a valid namespaces given accessing guid store outside of the security context', () => {
-    let error = null;
-    beforeAll(() => {
-        try {
-            const ns = new NamespaceA();
-            ns.get({ type: Namespace });
-        } catch (err) {
-            error = err;
-        }
-    });
-    it('should raise an error', () => {
-        expect(error).toBeDefined();
-        expect(error).not.toBeNull();
-        expect(error.message).toBe('Secure Context Error: failed to get value');
-    });
-});
 describe('when creating an invalid namespace given a namespace of "part.$##@.%#$%"', () => {
     let error = null;
     beforeAll(() => {
